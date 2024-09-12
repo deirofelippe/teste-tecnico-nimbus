@@ -1,0 +1,47 @@
+version: "3.9"
+
+services:
+  app:
+    image: deirofelippe/teste-tecnico-nimbus:v1
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: app
+    ports:
+      - 5784:5784
+    volumes:
+      - "./:/app"
+    depends_on:
+      - db
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: 512M
+
+  db:
+    image: mysql:8.0
+    container_name: db
+    restart: always
+    ports:
+      - "3306:3306"
+    # volumes:
+    #   - "./.v_mysql:/var/lib/mysql"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: teste_nimbus
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:5.1.1
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_ARBITRARY: 1
+      PMA_HOSTS: db
+      PMA_USER: root
+      PMA_PASSWORD: root
+    depends_on:
+      - db

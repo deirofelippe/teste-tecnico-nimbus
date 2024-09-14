@@ -46,6 +46,7 @@
         "donjayamanne.python-extension-pack",
         "donjayamanne.git-extension-pack",
         "humao.rest-client",
+        "ms-azuretools.vscode-docker",
         "esbenp.prettier-vscode",
         "ms-python.black-formatter"
       ]

@@ -10,8 +10,18 @@ server:
 migrate:
 	@python manage.py migrate
 
+mkmigrate:
+	@python manage.py makemigrations customer
+
+test-debug:
+	@python -m pytest -s -v tests/
+
 test:
-	@pytest tests
+	@python -m pytest -v tests/
+
+test-cov:
+	@python -m coverage run -m pytest tests/
+	@python -m coverage html
 
 ## DOCKER
 

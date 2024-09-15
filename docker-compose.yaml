@@ -10,7 +10,7 @@ services:
     ports:
       - 5784:5784
     volumes:
-      - "./aplicacao-1:/app"
+      - "./:/app"
       - "./Makefile:/app/Makefile"
     depends_on:
       - db
@@ -31,7 +31,7 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - "./aplicacao-2:/app"
+      - "./:/app"
       - "./Makefile:/app/Makefile"
     depends_on:
       - db

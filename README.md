@@ -27,7 +27,6 @@
 - Cerberus
 - Loguru
 - ReportLab
-- CronTab
 
 ## Como executar?
 
@@ -97,21 +96,54 @@ Foi usado o phpMyAdmin como interface gráfica para o banco de dados.
 
 ## Checklist
 
+- Projeto todo
+
+  - [ ] C4 Model para a documentação das aplicações
+  - [x] Commits semânticos
+
 - Aplicação 1
 
-  - [x] API com Django
-  - [x] Logs com loguru
-  - [x] Testes automatizados com PyTest
-  - [ ] Testar todas as possibilidades de input, erros e branches
-  - [x] Banco com MySQL
-  - [x] API Versioning
-  - [x] Tratamento de error
-  - [x] Validações
-  - [x] Separação por layers
-  - [x] Commits semânticos
+  - Obrigatório:
+    - [x] Execução contínua, parando com comando explícito
+    - [x] Recepção de dado via protocolo TCP/IP (Django)
+    - [x] Armazenamento de dado (Banco com MySQL)
+    - [x] Responde "Ok" para o cliente quando tudo der certo
+    - [x] Os dados devem ser e estar no seguinte formato: nome,email,telefone,idade
+    - [x] Caso não atenda ao formato (validação com Cerberus), deve lançar erro com resposta genérica
+  - Opicional:
+    - [x] Logs com loguru
+    - [x] Testes automatizados com PyTest
+    - [ ] Testar todas as possibilidades de input, erros e branches
+    - [ ] API Versioning
+    - [x] Tratamento de error
+    - [x] Separação por layers
 
 - Aplicação 2
 
-## Aplicação 1
+  - Obrigatório:
+    - [ ] Script deve receber os parametros:
+      - [ ] Telefone: um ou mais separado por vírgula
+      - [ ] Data: Y/m/d H:m:s
+      - [ ] Envia_email: relatório deverá ou não ser enviado por email
+      - [ ] Bruto: caminho para o arquivo bruto
+    - [ ] Consultar dados informações salvas no banco de acordo com os parametros de entrada
+    - [ ] Deve ler as informações de mensagem e evento do arquivo bruto de forma dinâmica
+    - [ ] Gerar relatório (ReportLab)
+      - [ ] Previsão de fenomeno deve ser agrupado por data e mensagem
+      - [ ] Fenômeno deve ser marcado com vermelho se na mensagem aparecer a palavra "forte"
+      - [ ] Seções do pdf: 1 - análise, 2 - previsões
+      - [ ] Cada seção de previsão deve começar em nova página
+      - [ ] Cabeçalho: título, nome do cliente, data da confecção, tipo do conteúdo (Análise ou Previsão)
+    - [ ] Envio do relatório por email
+      - [ ] Título com data do relatório
+      - [ ] PDF anexado
+      - [ ] Email de origem deve ser configuravel por constante
+    - [ ] Registrar logs em um arquivo (Loguru)
+  - Opicional:
+    - [ ] Testes automatizados com PyTest
+    - [ ] Testar todas as possibilidades de input, erros e branches
+    - [ ] Buscar informações pela api (requests)
+    - [ ] Tratamento de error
+    - [ ] Separação por layers
 
 ## Melhoria no sistema

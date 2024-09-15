@@ -10,7 +10,7 @@ RUN apt update \
         # dependências do mysqlclient
         default-libmysqlclient-dev build-essential pkg-config \
     # usuário para ser usado pelo devcontainer
-    && adduser -u 5678 --disabled-password --gecos "" py
+    && adduser -u 1000 --disabled-password --gecos "" py
 
 COPY ./requirements.txt ./
 

@@ -56,3 +56,47 @@ def test_deve_conseguir_criar_customer_no_mock(mocker: MockerFixture, setup_data
     assert call_args["phone"] == phone
     assert call_args["age"] == age
     assert len(result["errors"]) == 0
+
+
+def test_deve_dar_erro_de_validacao_em_todos_os_campos(
+    setup_service: CreateCustomerService,
+):
+    name = (
+        "nsdffsdsdffsdnsdffsdsdffsdnsdffsdsdffsdnsdffsdsdffsdnsdffsdsdffsdnsdffsdsdffsd"
+    )
+    email = "email"
+    phone = "21991"
+    age = "273434"
+    input = {"data": f"{name},{email},{phone},{age}"}
+
+    result = setup_service.execute(input)
+
+    assert len(result["errors"]) == 4
+
+
+def test_deve_dar_erro_de_falta_de_campos(
+    setup_data: dict, setup_service: CreateCustomerService
+):
+    name = setup_data["name"]
+    email = setup_data["email"]
+    phone = setup_data["phone"]
+    input = {"data": f"{name},{email},{phone}"}
+
+    result = setup_service.execute(input)
+
+    assert len(result["errors"]) == 1
+
+
+def test_deve_dar_erro_de_numero_de_campos_excedido(
+    setup_data: dict, setup_service: CreateCustomerService
+):
+    name = setup_data["name"]
+    email = setup_data["email"]
+    phone = setup_data["phone"]
+    age = setup_data["age"]
+    tag = "teste"
+    input = {"data": f"{name},{email},{phone},{age},{tag}"}
+
+    result = setup_service.execute(input)
+
+    assert len(result["errors"]) == 1

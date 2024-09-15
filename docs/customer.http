@@ -1,0 +1,12 @@
+@host = http://localhost:5784
+
+POST {{host}}/customers HTTP/1.1
+Content-Type: application/json
+
+{
+    "data": "nome,email@teste.com.br,21912345678,27"
+}
+
+###
+GET {{host}}/hello-world HTTP/1.1
+Content-Type: application/json

@@ -33,11 +33,17 @@ init-all:
 start-server:
 	@docker compose exec -it app1 bash -c "make py-mig ; make py-server"
 
-exec:
+app1:
 	@docker compose exec -it app1 bash
 
-exec-root:
+app1-root:
 	@docker compose exec -u root app1 bash
+
+app2:
+	@docker compose exec -it app2 bash
+
+app2-root:
+	@docker compose exec -u root app2 bash
 
 up:
 	@docker compose up -d --build

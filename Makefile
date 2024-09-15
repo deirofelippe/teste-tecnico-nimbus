@@ -1,16 +1,16 @@
-init-container:
+init-tmp-container:
 	@docker container run -it --rm --name app -v $$(pwd):/app -w /app python:3.12.5-alpine3.20 ash
 
-gen-reqs:
+py-reqs:
 	@pip freeze > ./requirements.txt
 
-server:
+py-server:
 	@python manage.py runserver 0.0.0.0:5784
 	
-migrate:
+py-mig:
 	@python manage.py migrate
 
-mkmigrate:
+py-mkmig:
 	@python manage.py makemigrations customer
 
 test-debug:
@@ -24,6 +24,12 @@ test-cov:
 	@python -m coverage html
 
 ## DOCKER
+
+init-all: 
+	@/bin/bash ./init-all.sh
+
+start-server:
+	@docker compose exec -it app bash -c "make py-mig ; make py-server"
 
 exec:
 	@docker compose exec -it app bash

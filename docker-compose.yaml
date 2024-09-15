@@ -1,16 +1,17 @@
 version: "3.9"
 
 services:
-  app:
-    image: deirofelippe/teste-tecnico-nimbus:v1
+  app1:
+    image: deirofelippe/teste-tecnico-nimbus-app-1:v1
     build:
-      context: ./
+      context: ./aplicacao-1
       dockerfile: Dockerfile
-    container_name: app
+    container_name: app1
     ports:
       - 5784:5784
     volumes:
-      - "./:/app"
+      - "./aplicacao-1:/app"
+      - "./Makefile:/app/Makefile"
     depends_on:
       - db
     environment:
@@ -20,6 +21,21 @@ services:
     #     limits:
     #       cpus: "1"
     #       memory: 512M
+
+  app2:
+    image: deirofelippe/teste-tecnico-nimbus-app-2:v1
+    build:
+      context: ./aplicacao-2
+      dockerfile: Dockerfile
+    container_name: app2
+    ports:
+      - 3000:3000
+    volumes:
+      - "./aplicacao-2:/app"
+      - "./Makefile:/app/Makefile"
+    depends_on:
+      - db
+      - app1
 
   db:
     image: mysql:8.0

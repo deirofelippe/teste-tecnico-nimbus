@@ -13,10 +13,10 @@ while true; do
 done
 
 echo "==========> Executando migrations"
-docker compose exec -it app bash -c "make py-mig"
+docker compose exec -it app1 bash -c "make py-mig"
 
 echo "==========> Gerando cobertura de código"
-docker compose exec -it app bash -c "make test-cov"
+docker compose exec -it app1 bash -c "make test-cov"
 
 echo "==========> Iniciando o servidor"
-docker compose exec -it app bash -c "make py-server"
+docker compose exec -it app1 bash -c "make py-server"

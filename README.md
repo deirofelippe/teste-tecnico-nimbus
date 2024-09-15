@@ -4,10 +4,10 @@
 
 - [Tecnologias e libs usadas](#tecnologias-e-ferramentas-usadas)
 - [Como executar?](#como-executar)
-    - [Como executar?](#iniciar-tudo)
-    - [Iniciar o servidor](#iniciar-o-servidor)
-    - [Como executar os testes?](#como-executar-os-testes)
-    - [Gerar o relatório de cobertura de código?](#gerar-o-relatório-de-cobertura-de-código)
+  - [Como executar?](#iniciar-tudo)
+  - [Iniciar o servidor](#iniciar-o-servidor)
+  - [Como executar os testes?](#como-executar-os-testes)
+  - [Gerar o relatório de cobertura de código?](#gerar-o-relatório-de-cobertura-de-código)
 - [Arquitetura usada e desenho](#arquitetura-usada-e-desenho)
 - [Padrões usados](#padrões-usados)
 - [Client HTTP](#client-http-testar-endpoints)
@@ -44,8 +44,8 @@
 
 - `docker compose up -d`: inicia os containers.
 - `docker compose exec -it app bash`: acessa o container.
-    - `python manage.py migrate`: executa as migrations.
-    - `python manage.py runserver 0.0.0.0:5784`: inicia o servidor.
+  - `python manage.py migrate`: executa as migrations.
+  - `python manage.py runserver 0.0.0.0:5784`: inicia o servidor.
 
 ### Iniciar o servidor
 
@@ -73,7 +73,7 @@ Por quê foi usada arquitetura em camadas?
 - Service: orquestra a lógica de negócio.
 - Repository: meio para qualquer acesso a serviços externos como api, banco de dados e etc.
 
-![](./docs/arquitetura.png)
+![](./aplicacao-1/docs/arquitetura.png)
 
 ## Padrões usados
 
@@ -87,27 +87,28 @@ Por quê foi usada arquitetura em camadas?
 
 Foi usado a extensão Rest Client do VSCode para os testar os endpoints (como insomnia ou postman).
 
-![](./docs/images/rest-client.png)
+![](./aplicacao-1/docs/images/rest-client.png)
 
 ## GUI para banco de dados
 
 Foi usado o phpMyAdmin como interface gráfica para o banco de dados.
 
-![](./docs/images/php-my-admin.png)
+![](./aplicacao-1/docs/images/php-my-admin.png)
 
 ## Checklist
 
 - Aplicação 1
-    - [x] API com Django
-    - [x] Logs com loguru
-    - [x] Testes automatizados com PyTest
-    - [ ] Testar todas as possibilidades de input, erros e branches
-    - [x] Banco com MySQL
-    - [x] API Versioning
-    - [x] Tratamento de error
-    - [x] Validações
-    - [x] Separação por layers
-    - [x] Commits semânticos
+
+  - [x] API com Django
+  - [x] Logs com loguru
+  - [x] Testes automatizados com PyTest
+  - [ ] Testar todas as possibilidades de input, erros e branches
+  - [x] Banco com MySQL
+  - [x] API Versioning
+  - [x] Tratamento de error
+  - [x] Validações
+  - [x] Separação por layers
+  - [x] Commits semânticos
 
 - Aplicação 2
 

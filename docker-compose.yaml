@@ -13,11 +13,13 @@ services:
       - "./:/app"
     depends_on:
       - db
-    deploy:
-      resources:
-        limits:
-          cpus: "1"
-          memory: 512M
+    environment:
+      DJANGO_SETTINGS_MODULE: teste_nimbus.settings
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: "1"
+    #       memory: 512M
 
   db:
     image: mysql:8.0

@@ -1,18 +1,34 @@
 import re
 import json
 from datetime import datetime
+from src.logger import logger
 
 
 def process_raw_file(raw_file_path: str) -> dict:
+    logger.info("PROCCESSRAWFILE -> Input:")
+    logger.info(raw_file_path)
+    logger.info("PROCCESSRAWFILE -> Iniciando a etapa de processar o arquivo bruto...")
+
+    logger.info("PROCCESSRAWFILE -> Carregando o arquivo bruto...")
     data = load_raw_file(raw_file_path)
 
+    logger.info("PROCCESSRAWFILE -> Criano nova estrutura para dados de análise...")
     analysis = create_new_phenomena_list_structure(data["análise"], "Análise")
+
+    logger.info("PROCCESSRAWFILE -> Criano nova estrutura para dados de previsão...")
     forecast = create_new_phenomena_list_structure(data["previsao"], "Previsão")
 
-    return {
+    output = {
         "analysis": analysis,
         "forecast": forecast,
     }
+
+    logger.info(
+        "PROCCESSRAWFILE -> Finalizando a etapa de processar o arquivo bruto..."
+    )
+    logger.info("RELATORIO -> Output:")
+    logger.info(output)
+    return output
 
 
 def load_raw_file(raw_file_path: str):

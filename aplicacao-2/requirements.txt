@@ -6,7 +6,7 @@ Faker==28.4.1
 iniconfig==2.0.0
 loguru==0.7.2
 mypy-extensions==1.0.0
-mysqlclient==2.2.4
+mysql-connector-python==9.0.0
 packaging==24.1
 pathspec==0.12.1
 pillow==10.4.0

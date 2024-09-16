@@ -7,8 +7,6 @@ ENV PYTHONUNBUFFERED=1
 RUN apt update \
     && apt install -y \
         make curl git fontconfig \
-        # dependências do mysqlclient
-        default-libmysqlclient-dev build-essential pkg-config \
     # usuário para ser usado pelo devcontainer
     && adduser -u 1000 --disabled-password --gecos "" py
 

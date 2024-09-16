@@ -81,6 +81,7 @@ Por quê foi usada arquitetura em camadas?
 - Fail Fast/Early Return
 - Dependency Injection
 - Single Responsability Principle (SRP)
+- Evitei usar o List Comprehension no caso de if e for para deixar o código mais legível
 
 ## Client HTTP (Testar endpoints)
 
@@ -127,23 +128,31 @@ Foi usado o phpMyAdmin como interface gráfica para o banco de dados.
       - [ ] Envia_email: relatório deverá ou não ser enviado por email
       - [ ] Bruto: caminho para o arquivo bruto
     - [ ] Consultar dados informações salvas no banco de acordo com os parametros de entrada
-    - [ ] Deve ler as informações de mensagem e evento do arquivo bruto de forma dinâmica
-    - [ ] Gerar relatório (ReportLab)
-      - [ ] Previsão de fenomeno deve ser agrupado por data e mensagem
-      - [ ] Fenômeno deve ser marcado com vermelho se na mensagem aparecer a palavra "forte"
-      - [ ] Seções do pdf: 1 - análise, 2 - previsões
-      - [ ] Cada seção de previsão deve começar em nova página
-      - [ ] Cabeçalho: título, nome do cliente, data da confecção, tipo do conteúdo (Análise ou Previsão)
+    - [x] Deve ler as informações de mensagem e evento do arquivo bruto de forma dinâmica
+    - [x] Gerar relatório (ReportLab)
+      - [x] Previsão de fenomeno deve ser agrupado por data e mensagem
+      - [x] Fenômeno deve ser marcado com vermelho se na mensagem aparecer a palavra "forte"
+      - [x] Seções do pdf: 1 - análise, 2 - previsões
+      - [x] Cada seção de previsão deve começar em nova página
+      - [x] Cabeçalho: título, nome do cliente, data da confecção, tipo do conteúdo (Análise ou Previsão)
     - [ ] Envio do relatório por email
       - [ ] Título com data do relatório
       - [ ] PDF anexado
       - [ ] Email de origem deve ser configuravel por constante
     - [ ] Registrar logs em um arquivo (Loguru)
   - Opicional:
-    - [ ] Testes automatizados com PyTest
-    - [ ] Testar todas as possibilidades de input, erros e branches
+    - [x] Testes automatizados com PyTest
+    - [ ] Testar as barnches de process_raw_file
     - [ ] Buscar informações pela api (requests)
     - [ ] Tratamento de error
-    - [ ] Separação por layers
+    - [x] Separação por layers
 
-## Melhoria no sistema
+## Melhoria nos sistemas
+
+- Deixar o relatório mais parecido com o exemplo, como:
+  - "Análise" ou "Previsão" fazer parte do Header e se repetir em cada página
+  - Centralizar verticalmente o fenomeno no background e mover o background para a esquerda
+- Testar mais possibilidades no código (aplicação 1 e aplicação 2) para assegurar que tudo funcione, como:
+  - Possibilidade de input, limite máximo e mínimo
+  - Branches
+  - Casos de erro

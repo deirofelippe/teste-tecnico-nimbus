@@ -1,6 +1,6 @@
 FROM python:3.12.5-slim-bookworm
 
-WORKDIR /app
+WORKDIR /app/aplicacao-1
 
 ENV PYTHONUNBUFFERED=1 
 

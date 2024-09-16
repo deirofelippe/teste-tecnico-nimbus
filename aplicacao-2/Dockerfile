@@ -1,12 +1,12 @@
 FROM python:3.12.5-slim-bookworm
 
-WORKDIR /app
+WORKDIR /app/aplicacao-2
 
 ENV PYTHONUNBUFFERED=1 
 
 RUN apt update \
     && apt install -y \
-        make curl git \
+        make curl git fontconfig \
         # dependências do mysqlclient
         default-libmysqlclient-dev build-essential pkg-config \
     # usuário para ser usado pelo devcontainer

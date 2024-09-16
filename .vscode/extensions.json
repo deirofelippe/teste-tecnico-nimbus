@@ -5,6 +5,7 @@
     "humao.rest-client",
     "ms-azuretools.vscode-docker",
     "hediet.vscode-drawio",
+    "tomoki1207.pdf",
     "esbenp.prettier-vscode",
     "ms-python.black-formatter"
   ]

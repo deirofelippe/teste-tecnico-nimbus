@@ -1,5 +1,6 @@
 import os
 from datetime import datetime
+from src.logger import logger
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.colors import HexColor
 from reportlab.lib.enums import TA_JUSTIFY
@@ -67,6 +68,7 @@ style_phenomenon_highlight = ParagraphStyle(
 
 def header_with_params(customer: str, date: str):
     def build_header(cvs, doc):
+        logger.info("RELATORIO -> Iniciando a criação do header...")
         margin = 40
 
         ### HEADER
@@ -94,6 +96,7 @@ def header_with_params(customer: str, date: str):
         )
         p1.wrapOn(cvs, 300, 50)
         p1.drawOn(canvas=cvs, x=320, y=780)
+        logger.info("RELATORIO -> Finalizando a criação do header...")
 
     return build_header
 
@@ -122,6 +125,11 @@ def generate_phenomenon_group(
 
 
 def generate_report(header_info: dict, analysis: dict, forecast: dict):
+    logger.info("RELATORIO -> Input: ")
+    logger.info(header_info)
+    logger.info(analysis)
+    logger.info(forecast)
+    logger.info("RELATORIO -> Iniciando etapa de montagem da estrutura do relatório...")
     customer = header_info["customer"]
     customer = customer.title()[0:25]
     date = header_info["date"]
@@ -144,16 +152,25 @@ def generate_report(header_info: dict, analysis: dict, forecast: dict):
 
     story = []
 
+    logger.info("RELATORIO -> Gerando o grupo de flows para a análise...")
     story.append(Paragraph("Análise", style_type))
     story_analysis = generate_phenomenon_group(analysis)
     story = story + story_analysis
 
     story.append(PageBreak())
 
+    logger.info("RELATORIO -> Gerando o grupo de flows para a previsão...")
     story.append(Paragraph("Previsão", style_type))
     story_forecast = generate_phenomenon_group(forecast)
     story = story + story_forecast
 
+    logger.info("RELATORIO -> Construindo o relatorio...")
     document.build(story)
+    logger.info("RELATORIO -> Relatorio construido.")
 
+    logger.info(
+        "RELATORIO -> Finalizando etapa de montagem da estrutura do relatório..."
+    )
+    logger.info("RELATORIO -> Output: ")
+    logger.info(filename)
     return filename

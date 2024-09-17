@@ -1,12 +1,17 @@
-import sys
+import os, time
 from loguru import logger
+from datetime import datetime
 
-format = (
-    "<white>{time:YYYY/MM/DD HH:mm:ss}</white> | <green>{level}</green> | {message}"
-)
+os.environ["TZ"] = "America/Sao_Paulo"
+time.tzset()
+
+now = datetime.now().strftime("%Y%m%d")
+format = "{time:YYYY-MM-DD  HH:mm:ss} | {level} | {message} "
 
 logger.remove(0)
 logger.add(
-    sys.stdout,
+    f"/app/aplicacao-1/logs/log_{now}.log",
+    rotation="1 days",
+    retention="7 days",
     format=format,
 )

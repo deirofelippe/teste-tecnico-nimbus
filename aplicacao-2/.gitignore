@@ -1,3 +1,4 @@
 *.pdf
 logs/*.log
 __pycache__
+!reports/Relatorio_Meteorologico_modelo.pdf

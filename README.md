@@ -4,10 +4,10 @@
 
 - [Tecnologias e libs usadas](#tecnologias-e-ferramentas-usadas)
 - [Como executar?](#como-executar)
-  - [Como executar?](#iniciar-tudo)
-  - [Iniciar o servidor](#iniciar-o-servidor)
+  - [Executando a aplicação 1](#executando-a-aplicação-1)
+  - [Executando a aplicação 2](#executando-a-aplicação-2)
   - [Como executar os testes?](#como-executar-os-testes)
-  - [Gerar o relatório de cobertura de código?](#gerar-o-relatório-de-cobertura-de-código)
+  - [Gerar o relatório de cobertura de código?](#gerar-o-relatório-de-cobertura-de-código-aplicação-1)
 - [Arquitetura usada e desenho](#arquitetura-usada-e-desenho)
 - [Padrões usados](#padrões-usados)
 - [Client HTTP](#client-http-testar-endpoints)
@@ -30,34 +30,41 @@
 
 ## Como executar?
 
-### Iniciar tudo
+- Para iniciar os containers, execute `make init-all`.
 
-- `make init-all`: inicia os containers, executa as migrations, gera a cobertura de código e inicia o servidor.
+### Executando a aplicação 1
 
-**OU**
+- Execute o comando `make app2-start` para rodar as migrations e iniciar o servidor.
+- Acesse o arquivo `./docs/customer.http` para testar a api. É preciso instalar o extensão do VS Code chamada Rest Client.
+- Acesse `http://localhost:8080` para visualizar o banco de dados pelo phpMyAdmin.
+- Os logs da aplicação 1 está na pasta `./aplicacao-1/logs/`.
 
-- `make up`: inicia os containers.
-- `make start-server`: executa as migrations e inicia o servidor.
+### Executando a aplicação 2
 
-**OU**
-
-- `docker compose up -d`: inicia os containers.
-- `docker compose exec -it app bash`: acessa o container.
-  - `python manage.py migrate`: executa as migrations.
-  - `python manage.py runserver 0.0.0.0:5784`: inicia o servidor.
-
-### Iniciar o servidor
-
-- `make start-server`
+- Configure o SMTP na pasta `./aplicacao-2/constants.py`.
+  - Caso queira usar o mailhog para testar o envio de email, deixe a constante `SMTP_TEST = True`.
+  - Caso queira usar outro servidor, marque como `False` e configure o `FROM_EMAIL`, `FROM_PASSWORD`, `SMTP_HOST`, e `SMTP_PORT`.
+- Coloque o arquivo bruto dentro da pasta `./aplicacao-2/` para o docker conseguir acessar. O caminho para o script acessar o arquivo bruto será `/app/aplicacao-2/<nome-do-arquivo>`.
+- Execute `make app2-start` para iniciar o script.
+- Os logs da aplicação 1 está na pasta `./aplicacao-2/logs/`.
+- Acesse `http://localhost:8025` para visualizar os emails enviados, caso esteja usando o mailhog
+- Os relatórios são armazenados na pasta `./aplicacao-2/reports/`.
 
 ### Como executar os testes?
 
-- `make exec`: acessa o container.
+#### Aplicação 1
+
+- `make app1`: acessa o container da aplicação 1.
 - `make test`: executa os testes.
 
-### Gerar o relatório de cobertura de código?
+#### Aplicação 2
 
-- `make exec-root`: acessa o container como root.
+- `make app2`: acessa o container da aplicação 2.
+- `make test`: executa os testes.
+
+### Gerar o relatório de cobertura de código? (Aplicação 1)
+
+- `make app1`: acessa o container.
 - `make test-cov`: executa a geração do relatório de cobertura de código.
 
 ## Arquitetura usada e desenho
@@ -72,7 +79,7 @@ Por quê foi usada arquitetura em camadas?
 - Service: orquestra a lógica de negócio.
 - Repository: meio para qualquer acesso a serviços externos como api, banco de dados e etc.
 
-![](./aplicacao-1/docs/arquitetura.png)
+![](./docs/arquitetura.png)
 
 ## Padrões usados
 
@@ -87,13 +94,13 @@ Por quê foi usada arquitetura em camadas?
 
 Foi usado a extensão Rest Client do VSCode para os testar os endpoints (como insomnia ou postman).
 
-![](./aplicacao-1/docs/images/rest-client.png)
+![](./docs/images/rest-client.png)
 
 ## GUI para banco de dados
 
 Foi usado o phpMyAdmin como interface gráfica para o banco de dados.
 
-![](./aplicacao-1/docs/images/php-my-admin.png)
+![](./docs/images/php-my-admin.png)
 
 ## Checklist
 

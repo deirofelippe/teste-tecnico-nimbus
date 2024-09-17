@@ -4,7 +4,7 @@ POST {{host}}/customers HTTP/1.1
 Content-Type: application/json
 
 {
-    "data": "nome,email@teste.com.br,21912345678,27"
+    "data": "teste,teste@email.com.br,21991028955,26"
 }
 
 ###

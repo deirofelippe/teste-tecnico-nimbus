@@ -11,7 +11,7 @@ services:
       - 5784:5784
     volumes:
       - "./:/app"
-      - "./Makefile:/app/Makefile"
+      - "./Makefile:/app/aplicacao-1/Makefile:ro"
     depends_on:
       - db
     environment:
@@ -32,7 +32,7 @@ services:
       - 3000:3000
     volumes:
       - "./:/app"
-      - "./Makefile:/app/Makefile"
+      - "./Makefile:/app/aplicacao-2/Makefile:ro"
     depends_on:
       - db
       - app1

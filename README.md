@@ -10,10 +10,12 @@
   - [Gerar o relatório de cobertura de código?](#gerar-o-relatório-de-cobertura-de-código-aplicação-1)
 - [Arquitetura usada e desenho](#arquitetura-usada-e-desenho)
 - [Padrões usados](#padrões-usados)
-- [Client HTTP](#client-http-testar-endpoints)
-- [GUI para banco de dados](#gui-para-banco-de-dados)
+- [Ferramentas de GUI](#ferramentas-de-gui)
+  - [Client HTTP (REST Client)](#client-http-rest-client)
+  - [GUI para banco de dados (phpMyAdmin)](#gui-para-banco-de-dados-phpmyadmin)
+  - [GUI para email (Mailhog)](#gui-para-email-mailhog)
 - [Checklist](#checklist)
-- [Melhoria no sistema](#melhoria-no-sistema)
+- [Melhoria nos sistemas](#melhoria-nos-sistemas)
 
 ## Tecnologias e ferramentas usadas
 
@@ -90,17 +92,27 @@ Por quê foi usada arquitetura em camadas?
 - Single Responsability Principle (SRP)
 - Evitei usar o List Comprehension no caso de if e for para deixar o código mais legível
 
-## Client HTTP (Testar endpoints)
+## Ferramentas de GUI
+
+### Client HTTP (REST Client)
 
 Foi usado a extensão Rest Client do VSCode para os testar os endpoints (como insomnia ou postman).
 
 ![](./docs/images/rest-client.png)
 
-## GUI para banco de dados
+### GUI para banco de dados (phpMyAdmin)
 
 Foi usado o phpMyAdmin como interface gráfica para o banco de dados.
 
 ![](./docs/images/php-my-admin.png)
+
+### GUI para email (Mailhog)
+
+Foi usado o mailhog como SMTP server local para testar envio de email.
+
+![](./docs/images/mailhog-1.png)
+
+![](./docs/images/mailhog-2.png)
 
 ## Checklist
 

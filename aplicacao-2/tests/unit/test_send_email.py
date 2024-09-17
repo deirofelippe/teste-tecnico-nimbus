@@ -5,7 +5,7 @@ from constants import SMTP_TEST
 
 def test_send_mail(mocker: MockerFixture):
     mocker.patch(
-        "variables.SMTP_TEST",
+        "constants.SMTP_TEST",
         True,
     )
 

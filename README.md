@@ -32,7 +32,10 @@
 
 ## Como executar?
 
-- Para iniciar os containers, execute `make init-all`.
+- Resumo
+  - Para iniciar os containers, execute `make init-all`.
+  - `make app1-start` para executar (o comando acima já executa) a aplicação 1.
+  - `make app2-start` para executar a aplicação 2.
 
 ### Executando a aplicação 1
 

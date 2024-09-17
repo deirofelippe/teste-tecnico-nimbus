@@ -55,4 +55,7 @@ def execute_query(list_in: str, phones: list):
         cursor.close()
         connection.close()
 
+    if len(customers) < 1:
+        raise Exception("Nenhum cliente foi encontrado")
+
     return customers

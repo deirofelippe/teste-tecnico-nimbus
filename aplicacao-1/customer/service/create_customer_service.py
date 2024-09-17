@@ -14,8 +14,8 @@ class CreateCustomerService:
         self.create_customer_validator = create_customer_validator
 
     def execute(self, customer_data) -> dict:
-        logger.info("Iniciando o service")
-        logger.debug("Dados iniciais")
+        logger.info("SERVICE -> Iniciando o service...")
+        logger.debug("SERVICE -> Input:")
         logger.debug(customer_data)
 
         result = {"errors": {}}
@@ -39,7 +39,7 @@ class CreateCustomerService:
             "age": data[3],
         }
 
-        logger.info("Iniciando validação")
+        logger.info("SERVICE -> Iniciando validação...")
         errors = self.create_customer_validator.execute(customer)
 
         if len(errors) > 0:
@@ -53,7 +53,8 @@ class CreateCustomerService:
 
         self.customer_repository.create(customer)
 
-        logger.debug("Retorno do service")
+        logger.debug("SERVICE -> Finalizando o service...")
+        logger.debug("SERVICE -> Output:")
         logger.debug(result)
 
         return result

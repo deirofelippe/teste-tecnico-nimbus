@@ -20,6 +20,7 @@ def hello_world(request):
 
 @api_view(["POST"])
 def create(request):
+    logger.info("VIEW -> Iniciando a execução da view...")
     try:
         result = create_customer_service.execute(request.data)
 
@@ -29,6 +30,7 @@ def create(request):
             )
 
     except Exception as e:
+        logger.error("VIEW -> Error")
         logger.error(e)
         return Response(data={"message": "Internal Server Error"}, status=500)
 

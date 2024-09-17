@@ -7,8 +7,10 @@ class CustomerRepository:
         pass
 
     def create(self, input: dict):
+        logger.debug("REPOSITORY -> Input:")
+        logger.debug(input)
         try:
-            logger.info("Criando customer no banco de dados")
+            logger.info("REPOSITORY -> Criando customer no banco de dados.")
             Customer.objects.create(
                 id=input["id"],
                 name=input["name"],
@@ -16,8 +18,8 @@ class CustomerRepository:
                 phone=input["phone"],
                 age=input["age"],
             ).save()
-            logger.info("Customer criado")
+            logger.info("REPOSITORY -> Customer criado.")
         except Exception as e:
-            logger.error("Falha ao criar o customer no banco de dados")
+            logger.error("REPOSITORY -> Falha ao criar o customer no banco de dados.")
             logger.error(e)
             raise e

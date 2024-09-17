@@ -122,12 +122,12 @@ Foi usado o phpMyAdmin como interface gráfica para o banco de dados.
 - Aplicação 2
 
   - Obrigatório:
-    - [ ] Script deve receber os parametros:
-      - [ ] Telefone: um ou mais separado por vírgula
-      - [ ] Data: Y/m/d H:m:s
-      - [ ] Envia_email: relatório deverá ou não ser enviado por email
-      - [ ] Bruto: caminho para o arquivo bruto
-    - [ ] Consultar dados informações salvas no banco de acordo com os parametros de entrada
+    - [x] Script deve receber os parametros:
+      - [x] Telefone: um ou mais separado por vírgula
+      - [x] Data: Y/m/d H:m:s
+      - [x] Envia_email: relatório deverá ou não ser enviado por email
+      - [x] Bruto: caminho para o arquivo bruto
+    - [x] Consultar dados informações salvas no banco de acordo com os parametros de entrada
     - [x] Deve ler as informações de mensagem e evento do arquivo bruto de forma dinâmica
     - [x] Gerar relatório (ReportLab)
       - [x] Previsão de fenomeno deve ser agrupado por data e mensagem
@@ -135,16 +135,16 @@ Foi usado o phpMyAdmin como interface gráfica para o banco de dados.
       - [x] Seções do pdf: 1 - análise, 2 - previsões
       - [x] Cada seção de previsão deve começar em nova página
       - [x] Cabeçalho: título, nome do cliente, data da confecção, tipo do conteúdo (Análise ou Previsão)
-    - [ ] Envio do relatório por email
-      - [ ] Título com data do relatório
-      - [ ] PDF anexado
-      - [ ] Email de origem deve ser configuravel por constante
-    - [ ] Registrar logs em um arquivo (Loguru)
+    - [x] Envio do relatório por email
+      - [x] Título com data do relatório
+      - [x] PDF anexado
+      - [x] Email de origem deve ser configuravel por constante
+    - [x] Registrar logs em um arquivo (Loguru)
   - Opicional:
     - [x] Testes automatizados com PyTest
     - [ ] Testar as barnches de process_raw_file
     - [ ] Buscar informações pela api (requests)
-    - [ ] Tratamento de error
+    - [x] Tratamento de error
     - [x] Separação por layers
 
 ## Melhoria nos sistemas
@@ -156,3 +156,5 @@ Foi usado o phpMyAdmin como interface gráfica para o banco de dados.
   - Possibilidade de input, limite máximo e mínimo
   - Branches
   - Casos de erro
+- Permitir uso de segundos e mais dados na data de confecção na aplicação 2
+- Melhorar a validação da aplicação 2

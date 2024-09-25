@@ -4,6 +4,8 @@ Vídeo usando a aplicação 1 e aplicação 2
 
 [![Vídeo usando a aplicação 1 e aplicação 2](https://img.youtube.com/vi/qYRlWUg0b0I/0.jpg)](https://www.youtube.com/watch?v=qYRlWUg0b0I)
 
+**NOTA:** Criei um outro repositório ([aqui](https://github.com/deirofelippe/teste-dados-climaticos)) em que crio uma aplicação com Twisted e netCDF4, para conhecer essas ferramentas.
+
 ## Sumário
 
 - [Tecnologias e libs usadas](#tecnologias-e-ferramentas-usadas)

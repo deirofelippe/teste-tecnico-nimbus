@@ -27,8 +27,14 @@ test-cov:
 
 ## DOCKER
 
-init-all: 
-	@/bin/bash ./init-all.sh
+ci-cd: 
+	@gh extension exec act -j build
+
+init-all: up
+finish-all: down
+
+init-all-k8s: 
+	@./init-kubernetes.sh
 
 app1-start:
 	@docker compose exec -it app1 bash -c "make py-mig ; make py-server"
@@ -36,16 +42,19 @@ app1-start:
 app2-start:
 	@docker compose exec -it app2 bash -c "python main.py"
 
-app1:
+exec-develop:
+	@docker container exec -it develop-nimbus bash
+
+exec-app1:
 	@docker compose exec -it app1 bash
 
-app1-root:
+exec-app1-root:
 	@docker compose exec -u root app1 bash
 
-app2:
+exec-app2:
 	@docker compose exec -it app2 bash
 
-app2-root:
+exec-app2-root:
 	@docker compose exec -u root app2 bash
 
 up:

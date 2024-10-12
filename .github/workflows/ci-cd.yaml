@@ -13,6 +13,7 @@ jobs:
     env:
       WORKDIR: ./aplicacao-1
       DJANGO_SETTINGS_MODULE: teste_nimbus.settings
+      LOG_TYPE: terminal
 
     # services:
     #   db:
@@ -51,6 +52,4 @@ jobs:
       - name: Test with pytest
         working-directory: ${{env.WORKDIR}}
         run: |
-          pwd
-          ls -lah
           python -m pytest -v -s tests/

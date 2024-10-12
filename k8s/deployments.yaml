@@ -1,0 +1,111 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "app1" # nome do deployment
+  labels:
+    app: "app1" # label usado para os recursos se comunicarem e para fazer buscas
+spec:
+  selector:
+    matchLabels:
+      app: "app1" # label usado para os recursos se comunicarem e para fazer buscas
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: "app1" # label usado para os recursos se comunicarem e para fazer buscas
+    spec:
+      containers:
+        - name: "app1"
+          image: deirofelippe/teste-tecnico-nimbus-app-1:latest
+          ports:
+            - containerPort: 5784
+          envFrom: # injeta as variaveis de ambiente do configmap no pod
+            - configMapRef:
+                name: app1-env
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 5784
+            initialDelaySeconds: 10 # a partir de quantos segundo vai fazer o teste? tempo que a aplicacao leva pra iniciar
+            timeoutSeconds: 5 #
+            successThreshold: 1 # quantos sucessos seguidos depois de uma falha pro k8s saber que realmente está funcionando
+            failureThreshold: 10 # quantas falhas seguidas pro k8s fazer o restart do pod
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsUser: 0 # acessa o container como root
+          # command: ["/bin/sleep", "inf"] # sobreescreve o command dafault do container com sleep infinity
+          resources:
+            requests: # minimo de recursos
+              cpu: "250m" # 250m de 1000m (1000m = 1 vcpu)
+              memory: 150Mi
+            limits: # maximo de recursos
+              cpu: "500m" # 500m de 1000m (1000m = 1 vcpu)
+              memory: 512Mi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "db"
+  labels:
+    app: "db"
+spec:
+  selector:
+    matchLabels:
+      app: "db"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: "db"
+    spec:
+      containers:
+        - name: "db"
+          image: mysql:8.0
+          ports:
+            - containerPort: 3306
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: db-env
+          livenessProbe:
+            exec:
+              command:
+                ["mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+            initialDelaySeconds: 10 # a partir de quantos segundo vai fazer o teste? tempo que a aplicacao leva pra iniciar
+            periodSeconds: 5 # periodo que vao ser feito os testes
+            timeoutSeconds: 5 #
+            successThreshold: 1 # quantos sucessos seguidos depois de uma falha pro k8s saber que realmente está funcionando
+            failureThreshold: 10 # quantas falhas seguidas pro k8s fazer o restart do pod
+          # securityContext:
+          #   allowPrivilegeEscalation: false
+          #   runAsUser: 0
+          # command: ["/bin/sleep", "inf"]
+          resources: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "phpmyadmin"
+  labels:
+    app: "phpmyadmin"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: phpmyadmin
+  template:
+    metadata:
+      labels:
+        app: "phpmyadmin"
+    spec:
+      containers:
+        - name: phpmyadmin
+          image: phpmyadmin/phpmyadmin:5.1.1
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: phpmyadmin-env
+          resources: {}
+      restartPolicy: Always

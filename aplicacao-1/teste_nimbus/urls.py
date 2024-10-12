@@ -21,6 +21,7 @@ from customer import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path(route="health", view=views.health, name="health"),
     path(route="customers", view=views.create, name="create"),
     path(route="hello-world", view=views.hello_world, name="create"),
 ]

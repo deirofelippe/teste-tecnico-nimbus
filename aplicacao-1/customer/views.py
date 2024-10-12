@@ -17,6 +17,11 @@ def hello_world(request):
     request.data
     return Response({"message": "Hello, world!"})
 
+@api_view(["GET"])
+def health(request):
+    customer_repository.health_test()
+    return Response({"message": "Healthy"}, status=200)
+
 
 @api_view(["POST"])
 def create(request):

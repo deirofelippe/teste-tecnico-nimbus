@@ -14,6 +14,8 @@ Vídeo usando a aplicação 1 e aplicação 2
   - [Executando a aplicação 2](#executando-a-aplicação-2)
   - [Como executar os testes?](#como-executar-os-testes)
   - [Gerar o relatório de cobertura de código?](#gerar-o-relatório-de-cobertura-de-código-aplicação-1)
+- [Execução da pipeline CI/CD com act (GitHub Action local)](#execução-da-pipeline-cicd-com-act-github-action-local)
+- [Execução do Kubernetes](#execução-do-kubernetes)
 - [Arquitetura usada e desenho](#arquitetura-usada-e-desenho)
 - [Padrões usados](#padrões-usados)
 - [Ferramentas de GUI](#ferramentas-de-gui)
@@ -77,6 +79,22 @@ Vídeo usando a aplicação 1 e aplicação 2
 
 - `make app1`: acessa o container.
 - `make test-cov`: executa a geração do relatório de cobertura de código.
+
+## Execução da pipeline CI/CD com act (GitHub Action local)
+
+- `make ci-cd`
+
+![](./docs/ci-cd.gif)
+
+## Execução do Kubernetes
+
+- kubectl create namespace nimbus
+- kubectl config set-context --current --namespace=nimbus
+- kubectl apply -f k8s/
+- watch -n 1 "kubectl get all"
+- kubectl port-forward service/app1 5784:80
+- kubectl port-forward service/phpmyadmin 8080:80
+- watch -n 1 "kubectl get hpa"
 
 ## Arquitetura usada e desenho
 
@@ -186,3 +204,18 @@ Foi usado o mailhog como SMTP server local para testar envio de email.
   - Casos de erro
 - Permitir uso de segundos e mais dados na data de confecção na aplicação 2
 - Melhorar a validação da aplicação 2
+
+video de app robusta
+validacoes
+testes
+arquitetura
+c4 model
+documentacao descricao de funcionalidades e manuseio do projeto
+tratamento de erro e logs
+api versioning
+organizar codigo
+cache
+psr solid designpatterns
+
+k8s
+ci-cd

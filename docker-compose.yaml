@@ -1,8 +1,27 @@
 version: "3.9"
 
+networks:
+  default:
+    name: nimbus
+    internal: true
+
 services:
+  develop-nimbus:
+    image: deirofelippe/develop-teste-tecnico-nimbus:latest
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: develop-nimbus
+    working_dir: /app/aplicacao-1
+    # command: sleep infinity
+    # working_dir: /app/aplicacao-2
+    ports:
+      - 3030:3030
+    volumes:
+      - "./:/app"
+
   app1:
-    image: deirofelippe/teste-tecnico-nimbus-app-1:v1
+    image: deirofelippe/teste-tecnico-nimbus-app-1:latest
     build:
       context: ./aplicacao-1
       dockerfile: Dockerfile
@@ -13,17 +32,24 @@ services:
       - "./:/app"
       - "./Makefile:/app/aplicacao-1/Makefile:ro"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
       DJANGO_SETTINGS_MODULE: teste_nimbus.settings
-    # deploy:
-    #   resources:
-    #     limits:
-    #       cpus: "1"
-    #       memory: 512M
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5784/health"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: 512M
 
   app2:
-    image: deirofelippe/teste-tecnico-nimbus-app-2:v1
+    image: deirofelippe/teste-tecnico-nimbus-app-2:latest
     build:
       context: ./aplicacao-2
       dockerfile: Dockerfile
@@ -34,8 +60,10 @@ services:
       - "./:/app"
       - "./Makefile:/app/aplicacao-2/Makefile:ro"
     depends_on:
-      - db
-      - app1
+      db:
+        condition: service_healthy
+      app1:
+        condition: service_healthy
 
   db:
     image: mysql:8.0
@@ -49,6 +77,12 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_PASSWORD: root
       MYSQL_DATABASE: teste_nimbus
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:5.1.1
@@ -62,7 +96,8 @@ services:
       PMA_USER: root
       PMA_PASSWORD: root
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
   mailhog:
     image: mailhog/mailhog:v1.0.1

@@ -5,6 +5,12 @@ from logger import logger
 class CustomerRepository:
     def __init__(self) -> None:
         pass
+    
+    def health_test(self):
+        try:
+            Customer.objects.raw("SELECT * FROM customers LIMIT 1")
+        except Exception as e:
+            raise e
 
     def create(self, input: dict):
         logger.debug("REPOSITORY -> Input:")

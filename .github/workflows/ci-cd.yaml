@@ -1,0 +1,53 @@
+name: Pipeline CI-CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      WORKDIR: ./aplicacao-1
+      DJANGO_SETTINGS_MODULE: teste_nimbus.settings
+
+    # services:
+    #   db:
+    #     image: mysql:8.0
+    #     env:
+    #       MYSQL_ROOT_PASSWORD: root
+    #       MYSQL_PASSWORD: root
+    #       MYSQL_DATABASE: teste_nimbus
+    #     ports:
+    #       - "3307:3306"
+    #     options: >-
+    #       --health-cmd="mysqladmin ping"
+    #       --health-interval=10s
+    #       --health-timeout=5s
+    #       --health-retries=3
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.12.5"
+
+      - name: Install Ubuntu dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y default-libmysqlclient-dev build-essential pkg-config
+
+      - name: Install dependencies
+        working-directory: ${{env.WORKDIR}}
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Test with pytest
+        working-directory: ${{env.WORKDIR}}
+        run: python -m pytest -v -s tests/

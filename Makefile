@@ -13,7 +13,7 @@ test:
 ## APLICAÇÃO 1
 
 py-server:
-	@python manage.py runserver 0.0.0.0:5784
+	@LOG_TYPE=file python manage.py runserver 0.0.0.0:5784
 	
 py-mig:
 	@python manage.py migrate
@@ -44,24 +44,22 @@ app2-start:
 
 exec-develop:
 	@docker container exec -it develop-nimbus bash
+exec-develop-root:
+	@docker container exec -it -u root develop-nimbus bash
 
 exec-app1:
 	@docker compose exec -it app1 bash
-
 exec-app1-root:
 	@docker compose exec -u root app1 bash
 
 exec-app2:
 	@docker compose exec -it app2 bash
-
 exec-app2-root:
 	@docker compose exec -u root app2 bash
 
 up:
 	@docker compose up -d --build
-
 down:
 	@docker compose down
-
 ps:
 	@docker compose ps -a
